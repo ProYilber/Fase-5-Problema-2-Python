@@ -1,0 +1,65 @@
+# ==============================================================================
+# Curso: Fundamentos de Programación
+# Fase 5 - Evaluación Final POA
+# Problema 2: Gestión de precios de un menú de restaurante
+# ==============================================================================
+
+def calcular_precio_final(categoria_producto, precio_base, categoria_objetivo, umbral):
+    """
+    Módulo/Función que calcula el precio final de un producto.
+    Aplica un 15% de descuento si cumple con la categoría objetivo y supera el umbral de precio.
+    """
+    # Verificamos si cumple ambas condiciones
+    if categoria_producto.lower() == categoria_objetivo.lower() and precio_base > umbral:
+        descuento = precio_base * 0.15
+        precio_final = precio_base - descuento
+        return precio_final
+    else:
+        # Si no cumple, se mantiene el precio base
+        return precio_base
+
+def main():
+    # 1. Matriz de productos: [Nombre del Producto, Categoría, Precio Base]
+    # Se crean 6 productos de diversas categorías como exige el problema.
+    menu = [
+        ["Hamburguesa Doble", "Comida Rapida", 25000],
+        ["Perro Caliente", "Comida Rapida", 18000],
+        ["Ensalada Cesar", "Saludable", 22000],
+        ["Jugo Natural", "Bebidas", 8000],
+        ["Pizza Familiar", "Comida Rapida", 45000],
+        ["Corte de Res", "Carnes", 55000]
+    ]
+
+    # 2. Definir las condiciones de la promoción
+    categoria_promocion = "Comida Rapida"
+    umbral_precio = 20000
+
+    print("=" * 70)
+    print("           SISTEMA DE GESTIÓN DE PRECIOS Y PROMOCIONES")
+    print("=" * 70)
+    print(f"PROMOCIÓN ACTIVA: 15% de descuento en '{categoria_promocion}'")
+    print(f"Aplica solo para productos con precio mayor a ${umbral_precio}")
+    print("-" * 70)
+    
+    # Encabezado de la tabla de salida
+    print(f"{'PRODUCTO':<20} | {'CATEGORÍA':<15} | {'PRECIO BASE':<13} | {'PRECIO FINAL':<13}")
+    print("-" * 70)
+
+    # 3. Iterar sobre la matriz y aplicar la lógica de negocio
+    for producto in menu:
+        nombre = producto[0]
+        categoria = producto[1]
+        precio_base = producto[2]
+
+        # Llamado al módulo (función) para calcular el precio
+        precio_final = calcular_precio_final(categoria, precio_base, categoria_promocion, umbral_precio)
+
+        # 4. Salida: Mostrar producto, precio base y precio final
+        print(f"{nombre:<20} | {categoria:<15} | ${precio_base:<12.2f} | ${precio_final:<12.2f}")
+        
+    print("=" * 70)
+
+# Punto de entrada del programa
+if __name__ == "__main__":
+    main()
+    
